@@ -1,23 +1,24 @@
 {% extends "layout.html" %}
 
 {% block content %}
-    <h1>
-        Twit-Off, predicting who said what
-    </h1>
 
-    <p>Test List of Tweets:</p>
+    <h3>Add/try a new username</h3>
 
-    {% if tweetlist %}
-        <ul>
-            {% for tweet in tweetlist %}
-                <!-- 
-                    Get tweet data and usernames,
-                    then display them in a list                
-                -->
-                <li>"{{tweet.tweet}}" -{{tweet.username}}</li>
-            {% endfor %}
-        </ul>
-    {% else %}
-        <p>Tweets not found.</p>
-    {% endif %}
+    <form action="/users", method="POST">
+        <label>Username (their @ handle):</label>
+        <input type="text" name="username" placeholder="elonmusk">
+
+        <button>Get User</button>
+    </form>
+    <hr>
+    <p>Currently saved usernames:</p>
+
+    <ul>
+        {% for user in userlist %}
+            <li>
+                <a href={{"/users/" + user.screen_name}}>{{user.name}}</a>
+            </li>
+        {% endfor %}
+    </ul>
+
 {% endblock %}

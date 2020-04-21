@@ -1,0 +1,21 @@
+<!-- 
+    web_app/templates/users.html 
+
+    this page will be used to properly display a user's data
+-->
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1>{{user.name}}</h1>
+
+    <p>Latest tweets:</p>
+
+    {% for tweet in tweets %}
+
+        <p>{{tweet.full_text}}</p>
+
+    {% endfor %}
+
+{% endblock %}
