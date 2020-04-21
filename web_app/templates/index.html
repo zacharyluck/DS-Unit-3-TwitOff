@@ -7,14 +7,14 @@
 
     <p>Test List of Tweets:</p>
 
-    {% if tweets %}
+    {% if tweetlist %}
         <ul>
-            {% for tweet in tweets %}
+            {% for tweet in tweetlist %}
                 <!-- 
                     Get tweet data and usernames,
                     then display them in a list                
                 -->
-                <li>"{{tweet[0]}}" -{{tweet[1]}}</li>
+                <li>"{{tweet.tweet}}" -{{tweet.username}}</li>
             {% endfor %}
         </ul>
     {% else %}

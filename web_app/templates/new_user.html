@@ -1,0 +1,19 @@
+<!-- web_app/templates/new_book.html -->
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1>Add a new user</h1>
+
+    <p>Please fill out the form and submit to create a new user!</p>
+
+    <form action="/newuser/create" method="POST">
+
+      <label>Username:</label>
+      <input type="text" name="username" placeholder="Cool New Guy" value="Cool New Guy">
+
+      <button>Submit</button>
+    </form>
+
+{% endblock %}

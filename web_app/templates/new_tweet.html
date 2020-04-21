@@ -18,7 +18,7 @@
         <label>Author:</label>
         <select name="userid">
           {% for user in userlist %}
-            <option value={{user[0]}}>{{user[1]}}</option>
+            <option value={{user.userid}}>{{user.username}}</option>
           {% endfor %}
         </select>
 
