@@ -1,0 +1,23 @@
+{% extends "layout.html" %}
+
+{% block content %}
+    <h1>
+        Twit-Off, predicting who said what
+    </h1>
+
+    <p>Test List of Tweets:</p>
+
+    {% if tweets %}
+        <ul>
+            {% for tweet in tweets %}
+                <!-- 
+                    Get tweet data and usernames,
+                    then display them in a list                
+                -->
+                <li>"{{tweet[0]}}" -{{tweet[1]}}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>Tweets not found.</p>
+    {% endif %}
+{% endblock %}

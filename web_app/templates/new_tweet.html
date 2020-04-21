@@ -1,0 +1,32 @@
+<!-- web_app/templates/new_book.html -->
+
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <h1>Add a new tweet</h1>
+
+    <p>Please fill out the form and submit to create a new tweet!</p>
+
+    {% if userlist %}
+
+      <form action="/newtweet/create" method="POST">
+
+        <label>Title:</label>
+        <input type="text" name="tweet" placeholder="Tweet Message" value="Tweet Message">
+
+        <label>Author:</label>
+        <select name="userid">
+          {% for user in userlist %}
+            <option value={{user[0]}}>{{user[1]}}</option>
+          {% endfor %}
+        </select>
+
+        <button>Submit</button>
+      </form>
+    {% else %}
+      <p>You cannot add tweets if there are no users.</p>
+      <p>Please <a href="/newuser">create a new user</a>.</p>
+    {% endif %}
+
+{% endblock %}
