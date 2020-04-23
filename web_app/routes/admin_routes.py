@@ -37,7 +37,7 @@ def seed_db():
 
     for screen_name in ['elonmusk','justinbieber','s2t2']:
         twitter_user = api.get_user(screen_name)
-        statuses = api.user_timeline(screen_name, tweet_mode="extended", count=150, exclude_replies=True, include_rts=False)
+        statuses = api.user_timeline(screen_name, tweet_mode="extended", count=150)
         print("STATUSES COUNT:", len(statuses))
         
         # get existing user from the db or initialize a new one:

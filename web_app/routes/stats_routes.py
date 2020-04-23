@@ -44,7 +44,7 @@ def predict():
         labels.append(user_b.screen_name)
         embeddings.append(tweet.embedding)
 
-    classifier = LogisticRegression()
+    classifier = LogisticRegression(max_iter=1000)
     classifier.fit(embeddings, labels)
 
     print("-----------------")
