@@ -6,6 +6,10 @@
 
 {% extends "layout.html" %}
 
+{% block title %}
+    <title>TwitOff - {{user.name}}'s Tweets</title>
+{% endblock %}
+
 {% block content %}
 
     <h1>{{user.name}}</h1>
