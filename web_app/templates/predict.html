@@ -1,0 +1,35 @@
+<!-- web_app/templates/predict.html -->
+
+
+{% extends "layout.html" %}
+
+{% block content %}
+    <h2>Prediction Time</h2>
+
+    <p>Use the form below to predict which user is more likely to say a given tweet...</p>
+
+    <form action="/predict/results" method="POST">
+
+        <label>Twitter User A:</label>
+        <select name="screen_name_a">
+            {% for user in userlist %}
+                <option value={{user.screen_name}}>{{'@'+user.screen_name}}</option>
+            {% endfor %}
+        </select>
+        <br>
+
+        <label>Twitter User B:</label>
+        <select name="screen_name_b">
+            {% for user in userlist %}
+                <option value={{user.screen_name}}>{{'@'+user.screen_name}}</option>
+            {% endfor %}
+          </select>
+        <br>
+
+        <label>Tweet Text:</label>
+        <input type="text" name="tweet_text" placeholder="Tweet to predict here">
+        <br>
+
+        <button>Submit</button>
+    </form>
+{% endblock %}
