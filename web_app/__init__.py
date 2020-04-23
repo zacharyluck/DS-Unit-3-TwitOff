@@ -31,7 +31,7 @@ def create_app():
     app = Flask(__name__)
 
     # TODO: fix this
-    URI = os.getenv('DATABASE_URI')
+    URI = os.getenv('DATABASE_URL')
     app.config["SQLALCHEMY_DATABASE_URI"] = URI
     app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
     print('URI:',URI)
