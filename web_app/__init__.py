@@ -15,6 +15,8 @@
 # web_app/__init__.py
 
 from flask import Flask
+import os
+from dotenv import load_dotenv
 
 from web_app.models import db, migrate
 from web_app.routes.home_routes import home_routes
@@ -23,13 +25,15 @@ from web_app.routes.twitter_routes import twitter_routes
 from web_app.routes.admin_routes import admin_routes
 from web_app.routes.stats_routes import stats_routes
 
+load_dotenv()
+
 def create_app():
     app = Flask(__name__)
 
     # TODO: fix this
-    URI = "sqlite:///data_two.sqlite3"
+    URI = os.getenv('DATABASE_URI')
     app.config["SQLALCHEMY_DATABASE_URI"] = URI
-    app.config['SECRET_KEY'] = "ooooh very secret shhhh"
+    app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
     print('URI:',URI)
 
     db.init_app(app)
