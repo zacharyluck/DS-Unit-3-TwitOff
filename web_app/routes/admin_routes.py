@@ -3,27 +3,32 @@
 from flask import Blueprint, jsonify, request, render_template, flash, redirect
 from web_app.services.twitter_service import twitter_api_client
 from web_app.services.basilica_service import basilica_api_client
-
+from dotenv import load_dotenv
+import os
 from web_app.models import db, User, Tweet, parse_records
+
+load_dotenv()
 
 admin_routes = Blueprint("admin_routes", __name__)
 
-API_KEY = 'abc123'  # TODO: grab this from env or html request
+ADMIN_PASSWORD = os.getenv('ADMIN_PASSWORD')
 
-@admin_routes.route('/admin')
+@admin_routes.route('/admin', methods=['POST'])
 def admin_index():
-    return render_template('admin.html')
+    userdata = dict(request.form)
+    if userdata['password'] == ADMIN_PASSWORD:
+        return render_template('admin.html')
+    else:
+        flash('Incorrect Password', 'danger')
+        return redirect('/')
+
 
 @admin_routes.route("/admin/db/reset")
 def reset_db():
-    if API_KEY == 'abc123': 
-        print(type(db))
-        db.drop_all()
-        db.create_all()
-        return jsonify({"message": "DB RESET OK"})
-    else:
-        flash("Permission Denied", 'danger')
-        return redirect('/')
+    print(type(db))
+    db.drop_all()
+    db.create_all()
+    return jsonify({"message": "DB RESET OK"})
 
 @admin_routes.route("/admin/db/seed")
 def seed_db():
