@@ -20,13 +20,13 @@ def redirect_to_new_user():
 
 @twitter_routes.route("/users/<screen_name>")
 def get_user(screen_name=None):
-    print(screen_name)
+    # print(screen_name)
 
     api = twitter_api_client()
 
     twitter_user = api.get_user(screen_name)
     statuses = api.user_timeline(screen_name, tweet_mode="extended", count=150)
-    print("STATUSES COUNT:", len(statuses))
+    # print("STATUSES COUNT:", len(statuses))
     
     # get existing user from the db or initialize a new one:
     db_user = User.query.get(twitter_user.id) or User(id=twitter_user.id)
@@ -41,18 +41,18 @@ def get_user(screen_name=None):
 
     all_tweet_texts = [status.full_text for status in statuses]
     embeddings = list(basilica_api.embed_sentences(all_tweet_texts, model="twitter"))
-    print("NUMBER OF EMBEDDINGS", len(embeddings))
+    # print("NUMBER OF EMBEDDINGS", len(embeddings))
 
     counter = 0
     for status in statuses:
-        print(status.full_text)
-        print("----")
+        # print(status.full_text)
+        # print("----")
         # get existing tweet from the db or initialize a new one:
         db_tweet = Tweet.query.get(status.id) or Tweet(id=status.id)
         db_tweet.user_id = status.author.id # or db_user.id
         db_tweet.full_text = status.full_text
         embedding = embeddings[counter]
-        print(len(embedding))
+        # print(len(embedding))
         db_tweet.embedding = embedding
         db.session.add(db_tweet)
         counter+=1

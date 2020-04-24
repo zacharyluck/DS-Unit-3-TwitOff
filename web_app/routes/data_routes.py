@@ -30,7 +30,7 @@ def create_tweet():
     userdata = dict(request.form)
 
     # see how it's formed
-    print("FORM DATA:", userdata)
+    # print("FORM DATA:", userdata)
 
     # save it in database
     userinput = Tweet(
@@ -56,7 +56,7 @@ def create_user():
     userdata = dict(request.form)
 
     # see how it's formed
-    print("FORM DATA:", userdata)
+    # print("FORM DATA:", userdata)
 
     # save it in database
     userinput = User(
